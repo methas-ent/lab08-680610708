@@ -1,5 +1,28 @@
 # Lecture 18 - RESTful API (Part 3)
 
+# Lab 08 - Student API (API #1) (coppy from LAB07)
+
+### ป้อนข้อมูลนักศึกษา
+
+รหัส นศ.: 680610708
+
+ชื่อ-สกุล : เมธัส นายสู่
+
+Vercel URL : https://lab08-680610708.vercel.app/
+
+---
+
+หลังจากการ Fork และ Clone repository แล้ว, ให้เปิดโฟลเดอร์ด้วย VSCode และรันคำสั่งใน terminal:
+
+```bash
+pnpm install
+pnpm run dev
+```
+
+ให้นักศึกษาสร้างระบบ API สำหรับจัดการข้อมูลนักศึกษาอย่างง่าย โดยใช้ความรู้เรื่องการพัฒนา RESTFul API ด้วย Express + TypeScript
+
+กรอก Github Repo URL และ Vercel URL ของ นศ. ลงใน Spreadsheet ต่อไปนี้
+
 ### Content
 
 - Current API
@@ -183,7 +206,7 @@ const token = jwt.sign(
     role: "ADMIN",
   },
   jwt_secret,
-  { expiresIn: "5m" }
+  { expiresIn: "5m" },
 );
 ```
 
@@ -261,7 +284,7 @@ import { type CustomRequest, type UserPayload } from "../libs/types.js";
 export const authenticateToken = (
   req: CustomRequest, // using a custom request
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   // 1. check Request if "authorization" header exists
   //    and container "Bearer ...JWT-Token..."
@@ -385,7 +408,7 @@ import { users } from "../db/db.js";
 export const checkRoleAdmin = (
   req: CustomRequest,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   // 1. get "user payload" and "token" from (custom) request
   const payload = req.user;
@@ -423,7 +446,7 @@ import { users, reset_users } from "../db/db.js";
 export const checkRoles = (
   req: CustomRequest,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   // 1. get "user payload" and "token" from (custom) request
   const payload = req.user;
@@ -467,7 +490,7 @@ router.get(
         error: err,
       });
     }
-  }
+  },
 );
 ```
 
