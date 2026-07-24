@@ -10,6 +10,9 @@ import studentRouter_v2 from "./routes/studentsRoutes_v2.js";
 import studentRouter_v3 from "./routes/studentsRoutes_v3.js";
 import courseRouter_v2 from "./routes/coursesRouters_v2.js";
 
+import  enrollments_v1  from "./routes/enrollmentsRouters_v1.js";
+import enrollments_v2  from "./routes/enrollmentsRouters_v2.js";
+
 const app = express();
 const port = 3000;
 
@@ -28,23 +31,33 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Lecture18 API services");
 });
 
-app.get("/me", (req: Request, res: Response) => {
-  res.status(200).json({
-    success: true,
-    message: "Student Information",
-    data: {
-      studentId: "600610999",
-      firstName: "Dome",
-      lastName: "Potikanond",
-      program: "CPE",
-      section: "001",
-    },
-  });
-});
+
+// GET /api/me
+app.get('/api/me',(req:Request , res:Response) => {
+    try{
+        return res.status(200).json({
+        ok:true,
+        fullName: "Methas Naisoo",
+        studentId: "680610708"
+    })
+    } catch(err){
+        return res.status(404).json({
+            ok:false,
+            message: "Not found",
+            error:err
+        })
+    }
+})
+
 
 app.use("/api/v2/students", studentRouter_v2);
 app.use("/api/v3/students", studentRouter_v3);
 app.use("/api/v2/courses", courseRouter_v2);
+
+app.use("/api/v1/enrollments", enrollments_v1); // GET
+app.use("/api/v2/enrollments", enrollments_v2); // DELETE
+
+
 
 // endpoint check middleware
 app.use(notFoundMiddleware);
